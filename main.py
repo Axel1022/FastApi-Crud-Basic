@@ -1,6 +1,6 @@
 from datetime import datetime
 from typing import Text, Optional
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException , status
 from pydantic import BaseModel
 from uuid import uuid4 as UIDI
 
@@ -30,18 +30,30 @@ def read_root():
 
 @app.get("/posts")
 def get_post():
-    return lits_posts
+    if lits_posts:
+        return lits_posts
+    raise HTTPException(status_code= status.HTTP_404_NOT_FOUND, detail="No hay publicaciones que mostrar" )
 
 @app.get("/post/{id}")
 def get_post(id:str):
     for post in lits_posts:
         if post.get("id") == id:
             return post
-    return None
+    raise HTTPException (status_code=status.HTTP_404_NOT_FOUND)
 
 @app.post("/posts")
 def save_post(post_id: publicacionID):
     post = publicacion(**dict(post_id), id=str(UIDI()), published_at=datetime.now())
-    lits_posts.append(post.dict())
-    return lits_posts[-1]
+    if post:
+        lits_posts.append(post.dict())
+        return lits_posts[-1]
+    raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="No se ha podido crear la publicacion")
 
+@app.delete("/posts")
+def delete_posts (id:str):
+    for post in lits_posts:
+        if post.get("id") == id:
+            publicacion = post
+            lits_posts.remove(publicacion)
+            raise HTTPException(status_code= status.HTTP_302_FOUND, detail=f"Publicacion con ID: {id} eliminado")
+    raise HTTPException(status_code= status.HTTP_404_NOT_FOUND, detail=f"Publicacion con ID: {id} no encontrada")
