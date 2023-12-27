@@ -1,4 +1,3 @@
-
 # CrudBasico
 
 Crud Básico creado con FastAPI
@@ -9,10 +8,18 @@ Este proyecto es una aplicación CRUD básica desarrollada con FastAPI, un marco
 
 ## Características
 
-- Crear, leer, actualizar y eliminar (CRUD) publicaciones.
-- Cada publicación tiene un identificador único, título, autor, contenido, fecha de creación y estado de publicación.
-- Soporte para obtener la lista de todas las publicaciones y obtener detalles de una publicación por su ID.
-- Endpoint para agregar nuevas publicaciones.
+- **CRUD:** Crear, leer, actualizar y eliminar publicaciones.
+- **Atributos de Publicación:**
+  - Identificador único
+  - Título
+  - Autor
+  - Contenido
+  - Fecha de creación
+  - Estado de publicación
+- **Funcionalidades:**
+  - Obtener la lista de todas las publicaciones.
+  - Obtener detalles de una publicación por su ID.
+  - Agregar nuevas publicaciones.
 
 ## Requisitos
 
@@ -32,6 +39,8 @@ La aplicación estará disponible en [http://localhost:8000](http://localhost:80
 - **GET /posts:** Obtiene la lista de todas las publicaciones.
 - **GET /post/{id}:** Obtiene detalles de una publicación por su ID.
 - **POST /posts:** Agrega una nueva publicación.
+- **DELETE /posts/{id}:** Elimina una publicación por su ID.
+- **PUT /posts/{id}:** Actualiza una publicación por su ID.
 
 ## Ejemplo de Uso
 
@@ -53,6 +62,18 @@ curl "http://localhost:8000/posts"
 curl "http://localhost:8000/post/{id}"
 ```
 
+### Eliminar Publicación por ID
+
+```bash
+curl -X DELETE "http://localhost:8000/posts/{id}"
+```
+
+### Actualizar Publicación por ID
+
+```bash
+curl -X PUT "http://localhost:8000/posts/{id}" -H "Content-Type: application/json" -d '{"title":"Nuevo Titulo","author":"Nuevo Autor","content":"Nuevo Contenido"}'
+```
+
 ## Contribuciones
 
 ¡Las contribuciones son bienvenidas! Si encuentras algún problema o tienes alguna mejora, no dudes en abrir un [issue](https://github.com/tuusuario/CrudBasico/issues) o enviar un [pull request](https://github.com/tuusuario/CrudBasico/pulls).
@@ -62,6 +83,3 @@ curl "http://localhost:8000/post/{id}"
 - **Desarrollador 🧑‍💻:** Gary Alexander Campusano Paredes
 - **LinkedIn: [Gary Alexander Campusano Paredes](https://www.linkedin.com/in/gary-alexander-campusano-paredes-87a28724a/)**
 - **Correo Electrónico 📧:** ingcampusano@outlook.com
-
-
-
