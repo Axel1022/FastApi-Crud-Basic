@@ -39,3 +39,9 @@ def get_post(id:str):
             return post
     return None
 
+@app.post("/posts")
+def save_post(post_id: publicacionID):
+    post = publicacion(**dict(post_id), id=str(UIDI()), published_at=datetime.now())
+    lits_posts.append(post.dict())
+    return lits_posts[-1]
+
