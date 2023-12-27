@@ -53,7 +53,6 @@ def save_post(post_id: publicacionID):
 def delete_posts (id:str):
     for post in lits_posts:
         if post.get("id") == id:
-            publicacion = post
-            lits_posts.remove(publicacion)
+            lits_posts.remove(post)
             raise HTTPException(status_code= status.HTTP_302_FOUND, detail=f"Publicacion con ID: {id} eliminado")
     raise HTTPException(status_code= status.HTTP_404_NOT_FOUND, detail=f"Publicacion con ID: {id} no encontrada")
