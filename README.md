@@ -1,6 +1,4 @@
-¡Claro! Aquí está la versión completa en formato Markdown:
 
-```markdown
 # CrudBasico
 
 Crud Básico creado con FastAPI
