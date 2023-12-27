@@ -62,6 +62,6 @@ curl "http://localhost:8000/post/{id}"
 - **Desarrollador 🧑‍💻:** Gary Alexander Campusano Paredes
 - **LinkedIn: [Gary Alexander Campusano Paredes](https://www.linkedin.com/in/gary-alexander-campusano-paredes-87a28724a/)**
 - **Correo Electrónico 📧:** ingcampusano@outlook.com
-```
+
 
 
