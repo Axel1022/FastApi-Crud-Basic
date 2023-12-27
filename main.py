@@ -27,3 +27,15 @@ lits_posts = []
 @app.get("/")
 def read_root():
     return {"message": "Hola Mundo"}
+
+@app.get("/posts")
+def get_post():
+    return lits_posts
+
+@app.get("/post/{id}")
+def get_post(id:str):
+    for post in lits_posts:
+        if post.get("id") == id:
+            return post
+    return None
+
