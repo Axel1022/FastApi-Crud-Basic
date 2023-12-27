@@ -8,7 +8,7 @@ from uuid import uuid4 as UIDI
 app = FastAPI(title="CrudBasico", description="Crud Bbasico creado con fastApi")
 
 class publicacion(BaseModel):
-    id: Optional[str]
+    id: str
     title: str
     author: str
     content: Text
@@ -36,11 +36,12 @@ async def get_post():
     raise HTTPException(status_code= status.HTTP_404_NOT_FOUND, detail="No hay publicaciones que mostrar" )
 
 @app.get("/post/{id}")
-async def get_post(id:str):
+async def get_post(id: str):
     for post in lits_posts:
-        if post.get("id") == id:
-            return post
-    raise HTTPException (status_code=status.HTTP_404_NOT_FOUND)
+        if post["id"] == id:
+            post_dict = dict(post)  # Convert the dictionary view to a dictionary
+            return publicacion(**post_dict)  # Create a new instance of the publicacion class with the dictionary values
+    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Publicación con ID: {id} no encontrada")
 
 @app.post("/posts")
 async def save_post(post_id: publicacionID):
@@ -62,6 +63,6 @@ async def delete_posts (id:str):
 async def add_Post(post : publicacionID, id:str):
     for i, public  in enumerate(lits_posts):
         if public.get("id") == id:
-            lits_posts[i] = publicacion(**dict(post), id=str(id), published_at=datetime.now())
+            lits_posts[i] = dict(publicacion(**dict(post), id=str(id), published_at=datetime.now()))
             return JSONResponse(content={"message": "producto actualizado correctamente"})
     raise HTTPException(status_code= status.HTTP_404_NOT_FOUND, detail=f"Publicacion con ID: {id} no encontrada")
